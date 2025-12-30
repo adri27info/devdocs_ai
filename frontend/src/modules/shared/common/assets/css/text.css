@@ -1,0 +1,11 @@
+.text-error {
+  @apply text-red-500 font-bold;
+}
+
+.text-success {
+  @apply text-green-700 font-bold;
+}
+
+.text-neutral {
+  @apply text-gray-500;
+}

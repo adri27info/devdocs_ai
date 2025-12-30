@@ -1,0 +1,37 @@
+# BACKEND
+backend/.vscode/
+backend/stripe_secret/
+backend/microservices/**
+backend/media/
+backend/venv/
+backend/media/
+backend/.env
+backend/**/__pycache__/
+backend/*.log
+backend/devdocs_ai/utils/certs
+backend/devdocs_ai/apps/clear_migrations.sh
+backend/devdocs_ai/apps/**/migrations/*
+!backend/devdocs_ai/apps/**/migrations/__init__.py
+
+# FRONTEND
+frontend/.vscode/
+frontend/node_modules/
+frontend/.env
+frontend/.DS_Store
+frontend/dist/
+frontend/dist-ssr/
+frontend/coverage/
+frontend/*.local
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+frontend/.idea/
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+frontend/*.tsbuildinfo

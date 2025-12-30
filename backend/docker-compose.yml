@@ -1,0 +1,82 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - stripe_backend_shared_data:/app/stripe_secret
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - stripe
+    entrypoint: ${ENTRYPOINT_BACKEND}
+    container_name: devdocs_ai_backend
+    networks:
+      - devdocs_ai_network
+
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    container_name: devdocs_ai_db
+    networks:
+      - devdocs_ai_network
+
+  redis:
+    image: redis:7.0-alpine
+    volumes:
+      - redis_data:/data
+    container_name: devdocs_ai_redis
+    networks:
+      - devdocs_ai_network
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+    depends_on:
+      - redis
+      - backend
+      - stripe
+    volumes:
+      - stripe_backend_shared_data:/app/stripe_secret
+    entrypoint: ${ENTRYPOINT_CELERY}
+    container_name: devdocs_ai_celery
+    networks:
+      - devdocs_ai_network
+
+  stripe:
+    image: stripe/stripe-cli:latest
+    volumes:
+      - .:/app
+      - stripe_backend_shared_data:/app/stripe_secret
+    env_file:
+      - .env
+    entrypoint: ${ENTRYPOINT_STRIPE_CLI}
+    container_name: devdocs_ai_stripe_cli
+    networks:
+      - devdocs_ai_network
+
+volumes:
+  db_data:
+  redis_data:
+  stripe_backend_shared_data:
+
+networks:
+  devdocs_ai_network:
+    driver: bridge

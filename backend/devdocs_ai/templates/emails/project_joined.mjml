@@ -1,0 +1,59 @@
+<mjml>
+  <mj-body background-color="#f4f4f4">
+    <mj-section padding="40px 0">
+      <mj-column background-color="#ffffff" border-radius="8px" padding="30px">
+        {% if logo_url %}
+        <mj-image
+          width="160px"
+          src="{{ logo_url }}"
+          alt="DevDocs Ai Logo"
+          align="center"
+        />
+        {% endif %}
+        <mj-divider border-color="black" border-width="3px" padding="5px 0" />
+        <mj-text
+          font-size="18px"
+          color="#555555"
+          font-family="Helvetica, Arial, sans-serif"
+          align="center"
+          padding-top="15px"
+          line-height="1.5"
+        >
+          Hello,
+        </mj-text>
+        <mj-text
+          font-size="20px"
+          font-family="Helvetica, Arial, sans-serif"
+          align="center"
+          font-weight="bold"
+          padding-top="10px"
+        >
+          {{ user_email }}
+        </mj-text>
+        <mj-text
+          font-size="16px"
+          color="#555555"
+          font-family="Helvetica, Arial, sans-serif"
+          align="center"
+          padding-top="10px"
+          line-height="1.5"
+        >
+          New user has joined your project - {{ project_name }}. Please check
+          your notifications for more information.
+        </mj-text>
+        <mj-button
+          background-color="#101828"
+          color="white"
+          font-family="Helvetica, Arial, sans-serif"
+          font-size="16px"
+          font-weight="bold"
+          border-radius="4px"
+          padding-top="20px"
+          href="{{ notifications_url }}"
+        >
+          View Notifications
+        </mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

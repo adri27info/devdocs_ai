@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 98
+exclude =
+    venv/,
+    microservices/,
+    **/site-packages/,
+    **/__pycache__/,
+    **/migrations/

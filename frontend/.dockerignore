@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules
+npm-debug.log
+yarn.lock
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+*.env
+
+# Logs
+*.log
+
+# Editor & IDE-specific files
+.vscode/
+.idea/
+*.swp

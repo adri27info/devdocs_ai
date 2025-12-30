@@ -1,0 +1,43 @@
+.btn {
+  @apply w-50 p-2 rounded text-center font-semibold;
+}
+
+.btn-primary {
+  @apply text-white bg-blue-600 hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply text-white bg-gray-600 hover:bg-gray-700;
+}
+
+.btn-success {
+  @apply text-white bg-green-600 hover:bg-green-700;
+}
+
+.btn-warning {
+  @apply text-black bg-yellow-400 hover:bg-yellow-500;
+}
+
+.btn-danger {
+  @apply text-white bg-red-600 hover:bg-red-700;
+}
+
+.btn-info {
+  @apply text-white bg-cyan-600 hover:bg-cyan-700;
+}
+
+.btn-light {
+  @apply text-black bg-gray-200 hover:bg-gray-300;
+}
+
+.btn-dark {
+  @apply text-white bg-gray-900 hover:bg-gray-800;
+}
+
+.btn-link {
+  @apply text-blue-600 hover:underline bg-transparent shadow-none p-0;
+}
+
+.btn-neutral {
+  @apply text-gray-800 bg-gray-300 hover:bg-gray-200;
+}

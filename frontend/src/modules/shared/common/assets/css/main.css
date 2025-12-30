@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+@import './button.css';
+@import './text.css';
+
+.min-h-dvh-fallback {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.aside-custom-hover:hover,
+.aside-custom-hover.active {
+  color: white;
+  background-color: #4b5563;
+  font-weight: 600;
+}
+
+.aside-custom-hover svg {
+  stroke: black;
+}
+
+.aside-custom-hover:hover svg,
+.aside-custom-hover.active svg {
+  stroke: white;
+}
+
+.general-custom-hover:hover,
+.general-custom-hover.active {
+  color: white;
+  background-color: #4b5563;
+  font-weight: 600;
+}
+
+.general-custom-hover svg {
+  stroke: white;
+}
+
+.general-custom-hover:hover svg,
+.general-custom-hover.active svg {
+  stroke: white;
+}
