@@ -8,7 +8,7 @@ Before starting, you need to have the following accounts and tools:
 
 - **[Stripe](https://stripe.com/):** Required because users in the app can upgrade their subscription plans using this service.
 
-- **[Open Router](https://openrouter.ai/):** Required because the app uses a large language model (LLM) from Open Router to generate documentation.
+- **[OpenRouter](https://openrouter.ai/):** Required because the app uses a large language model (LLM) from Open Router to generate documentation.
 
 - **[Amazon Web Services - AWS](https://aws.amazon.com/):** Required for services like:
 
@@ -24,369 +24,442 @@ Before starting, you need to have the following accounts and tools:
 
 ## Gmail
 
-To use Gmail, you need to create an account. Once your account is ready, follow these steps:
+- Why do I use this service?
 
-1. Go to [Google Account Settings](https://myaccount.google.com).
+  I use this service because the application needs to send emails to users regarding actions they take within the app or to notify them about important events. Gmail provides a reliable SMTP service to handle these outgoing emails securely and efficiently.
 
-2. Enable **Two-Factor Authentication (2FA)**.
+- How to use it ?
 
-3. After enabling 2FA, go to the **App Passwords** section and do the following:
+  1.  Go to [Google Account Settings](https://myaccount.google.com).
 
-   - Give your app a name.
+  2.  Enable **Two-Factor Authentication (2FA)**.
 
-   - Copy the generated app password. Example:
+  3.  After enabling 2FA, go to the **App Passwords** section and do the following:
 
-   ```
-   EMAIL_HOST_USER="your_gmail@gmail.com"
-   EMAIL_HOST_PASSWORD="your_generated_app_password"  # Your generated app password
-   EMAIL_HOST="smtp.gmail.com"
-   EMAIL_PORT=587
-   EMAIL_USE_TLS=True
-   ```
+      - Give your app a name.
+
+      - Copy the generated app password. Example:
+
+      ```
+      EMAIL_HOST_USER="your_gmail@gmail.com"
+      EMAIL_HOST_PASSWORD="your_generated_app_password"  # Your generated app password
+      EMAIL_HOST="smtp.gmail.com"
+      EMAIL_PORT=587
+      EMAIL_USE_TLS=True
+      ```
 
 ## Docker Desktop
 
-1. Go to [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+- Why do I use this service?
 
-2. Download Docker Desktop for your operating system (e.g., Windows, macOS).
+  I use this service because it allows me to containerize the application with all its dependencies. Docker Desktop makes it easy to package the app in isolated containers, ensuring consistency across different environments.
 
-3. During installation, keep the following in mind:
+  I particularly like this technology because, with a few automated configurations and scripts, the entire application stack can be up and running in just a few minutes, simplifying development and deployment workflows.
 
-   - Use Docker Desktop for personal use.
+- How to use it?
 
-   - Use the **WSL 2 backend** (for Windows).
+  1.  Go to [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-   - Ensure integration with your WSL 2 distribution is enabled (e.g., Ubuntu). You can enable this in Docker Desktop under **Resources > WSL Integration**.
+  2.  Download Docker Desktop for your operating system (e.g., Windows, macOS).
+
+  3.  During installation, keep the following in mind:
+
+      - Use Docker Desktop for personal use.
+
+      - Use the **WSL 2 backend** (for Windows).
+
+      - Ensure integration with your WSL 2 distribution is enabled (e.g., Ubuntu). You can enable this in Docker Desktop under **Resources > WSL Integration**.
 
 ## Stripe
 
-To use Stripe, you need to create an account. In this project, I signed in using my Gmail account. Once inside Stripe, follow these steps:
+- Why do I use this service?
 
-1. Go to [Stripe](https://stripe.com/).
+  I use this service because it allows users to upgrade from the Free plan to the Premium plan within the application. Stripe provides a flexible subscription management system, enabling the app to automatically update a user's plan and grant additional features and benefits based on their subscription.
 
-2. Create a **Test Environment** (enable **TEST mode**).
+  Additionally, Stripe provides webhooks that notify the application in real time when a payment has been successfully completed, ensuring accurate and reliable subscription status updates.
 
-   - In the demo video, the test card `4242 4242 4242 4242` is used. This card is for testing only and does not generate actual charges.
+- How to use it?
 
-3. Once in Test Mode, copy the following API keys from the right side of the dashboard:
+  1.  Go to [Stripe](https://stripe.com/).
 
-   ```
-   STRIPE_SECRET_KEY="sk_test_XXXXXXXXX"
-   STRIPE_PUBLISHABLE_KEY="pk_test_XXXXX"
-   ```
+  2.  Create a **Test Environment** (enable **TEST mode**).
 
-4. Create a new product linked to your app:
+      - For testing purposes with Stripe, use the test card `4242 4242 4242 4242`. This card does not generate any actual charges when used in Test Mode.
 
-- Example: a $20 subscription called Premium Plan.
+  3.  Once in Test Mode, copy the following API keys from the right side of the dashboard:
 
-- To create the product, go to Product Catalog > Create New Product, then provide:
+      ```
+      STRIPE_SECRET_KEY="sk_test_XXXXXXXXX"
+      STRIPE_PUBLISHABLE_KEY="pk_test_XXXXX"
+      ```
 
-  - Product name
+  4.  Create a new product linked to your app:
 
-  - Description
+      - Example: a $20 subscription called Premium Plan.
 
-  - Attachment (optional)
+      - To create the product, go to Product Catalog > Create New Product, then provide:
 
-  - Pricing: One-time payment (important)
+      - Product name
 
-  - Price: e.g., $20
+      - Description
 
-  - Finally, save the product.
+      - Attachment (optional)
 
-5. After creating the product, go to the Pricing section and copy the generated Price ID:
+      - Pricing: One-time payment (important)
 
-   ```
-   STRIPE_PRICE_ID="price_XXXXXX"
-   ```
+      - Price: e.g., $20
 
-6. Finally, configure the backend environment variables for Stripe. Example:
+      - Finally, save the product.
 
-   ```
-   USE_STRIPE=True
-   STRIPE_SECRET_KEY="sk_test_XXXX"
-   STRIPE_PUBLISHABLE_KEY="pk_test_XXXX"
-   STRIPE_PRICE_ID="price_XXXXXX"
-   ```
+  5.  After creating the product, go to the Pricing section and copy the generated Price ID:
+
+      ```
+      STRIPE_PRICE_ID="price_XXXXXX"
+      ```
+
+  6.  Finally, configure the backend environment variables for Stripe. Example:
+
+      ```
+      USE_STRIPE=True
+      STRIPE_SECRET_KEY="sk_test_XXXX"
+      STRIPE_PUBLISHABLE_KEY="pk_test_XXXX"
+      STRIPE_PRICE_ID="price_XXXXXX"
+      ```
 
 ## Open Router
 
-To use Open Router, you need to create an account. In this project, I signed in using my Gmail account. Once inside Open Router, follow these steps:
+- Why do I use this service?
 
-1. Create an **API key** and give it a name. Example:
+  I use this service because it provides the large language model (LLM) used to generate documentation within the application. OpenRouter acts as the LLM provider, allowing the app to send prompts and receive structured documentation responses in return.
 
-   ```
-   OPENROUTER_API_KEY="sk-or-v1-XXXXX"
-   ```
+- How to use it ?
 
-2. Keep in mind that when I created my Open Router account, there were some free credits available for using paid LLMs. In this app, I opted to use the mistral-7b-instruct:free model, which is free at the moment.
+  1.  Go to [OpenRouter](https://openrouter.ai/)
 
-- If you are following this guide in the future and this model is no longer free, update the backend environment variable accordingly.
+  2.  Log in using your email account.
 
-3. Finally, configure the backend environment variables for Open Router. Example:
+  3.  Create an **API key** and give it a name. Example:
 
-   ```
-   OPENROUTER_API_KEY="sk-or-v1-XXXX"
-   OPENROUTER_BASE_URL="https://openrouter.ai/api/v1/chat/completions"
-   OPENROUTER_MODEL="mistralai/mistral-7b-instruct:free"
-   IMAGE_GHCR="ghcr.io/adri27info/fastapi-llm:latest"
-   ```
+      ```
+      OPENROUTER_API_KEY="sk-or-v1-XXXXX"
+      ```
+
+  4.  Keep in mind that when I created my Open Router account, there were some free credits available for using paid LLMs. In this app, I opted to use the mistral-7b-instruct:free model, which is free at the moment. If you are following this guide in the future and this model is no longer free, update the backend environment variable accordingly.
+
+  5.  Finally, configure the backend environment variables for Open Router. Example:
+
+      ```
+      OPENROUTER_API_KEY="sk-or-v1-XXXX"
+      OPENROUTER_BASE_URL="https://openrouter.ai/api/v1/chat/completions"
+      OPENROUTER_MODEL="mistralai/mistral-7b-instruct:free"
+      IMAGE_GHCR="ghcr.io/adri27info/fastapi-llm:latest"
+      ```
 
 ## AWS
 
-To use AWS, you need to create an account. Follow these steps:
+- Why do I use this service?
 
-1. Go to [AWS](https://aws.amazon.com/).
+  I use this service because it provides cloud-based infrastructure and managed services that fulfill the core requirements of my application. AWS allows the app to securely store files, serve content, run backend services, manage permissions, and automate infrastructure operations in a scalable and reliable way.
 
-2. Navigate to the **Create an Account** section.
+- How to use it?
 
-3. Fill in all the required information, such as account name, country, email, etc.
+  1.  Go to [AWS](https://aws.amazon.com/).
 
-   - At some point, to use AWS Free Tier services, you will be asked to provide a credit card for a $1 verification charge.
+  2.  Navigate to the **Create an Account** section.
 
-   - This is required to access services like IAM, S3, CloudFront, EC2, and Systems Manager within the app.
+  3.  Fill in all the required information, such as account name, country, email, etc.
 
-   - Note: The Free Tier allows you to use these services at no cost as long as you stay within usage limits. If you exceed them, charges may apply.
+      - At some point, to use AWS Free Tier services, you will be asked to provide a credit card for a $1 verification charge.
 
-4. Once all the required information is completed, your AWS account will be ready to use.
+      - This is required to access services like IAM, S3, CloudFront, EC2, and Systems Manager within the app.
+
+      - Note: The Free Tier allows you to use these services at no cost as long as you stay within usage limits. If you exceed them, charges may apply.
+
+  4.  Once all the required information is completed, your AWS account will be ready to use.
 
 ## AWS - IAM
 
-AWS Identity and Access Management (IAM) is a service that allows you to manage users, permissions, and policies within your AWS account. Once we understand its purpose, we will create a user with specific permissions and a role with an assigned policy.
+- Why do I use this service?
 
-1. Go to the **IAM** section in the AWS console.
+  I use this service to manage permissions and access control within my AWS account. IAM allows me to assign the required permissions to an AWS user so the application can interact with services such as S3, CloudFront, Systems Manager (SSM), and EC2.
 
-2. Create a new user:
+  Additionally, IAM is used to create a role with the appropriate policies so the application can securely manage and control EC2 instances through AWS Systems Manager.
 
-   - Provide a username.
+- How to use it?
 
-   - Attach the following permission policies to the user:
+  1.  Go to the **IAM** section in the AWS console.
 
-     - `AmazonEC2FullAccess`
+  2.  Create a new user:
 
-     - `AmazonS3FullAccess`
+      - Provide a username.
 
-     - `AmazonSSMFullAccess`
+      - Attach the following permission policies to the user:
 
-     - `CloudFrontFullAccess`
+        - `AmazonEC2FullAccess`
 
-   - Click **Next** and create the user.
+        - `AmazonS3FullAccess`
 
-3. Once the user is created, generate access keys:
+        - `AmazonSSMFullAccess`
 
-   - Go to **Security Credentials > Create Access Key**.
+        - `CloudFrontFullAccess`
 
-   - Select **Use Case: Local Code**.
+      - Click **Next** and create the user.
 
-   - You will obtain two keys (example):
+  3.  Once the user is created, generate access keys:
 
-   ```
-   AWS_ACCESS_KEY_ID="XXXXXXXX"
-   AWS_SECRET_ACCESS_KEY="XXXXXXXX"
-   ```
+      - Go to **Security Credentials > Create Access Key**.
 
-4. Next, create a Role:
+      - Select **Use Case: Local Code**.
 
-- Go to the Roles section and click Create Role.
+      - You will obtain two keys (example):
 
-- Choose AWS Service as the trusted entity and select EC2.
+      ```
+      AWS_ACCESS_KEY_ID="XXXXXXXX"
+      AWS_SECRET_ACCESS_KEY="XXXXXXXX"
+      ```
 
-- Select the use case EC2 Role for AWS Systems Manager.
+  4.  Next, create a Role:
 
-- Attach the following policy to the role: AmazonSSMManagedInstanceCore.
+  - Go to the Roles section and click Create Role.
 
-- Provide a name and description for the role.
+  - Choose AWS Service as the trusted entity and select EC2.
 
-- Click Create Role to finalize.
+  - Select the use case EC2 Role for AWS Systems Manager.
+
+  - Attach the following policy to the role: AmazonSSMManagedInstanceCore.
+
+  - Provide a name and description for the role.
+
+  - Click Create Role to finalize.
 
 ## AWS - S3
 
-Amazon S3 (Simple Storage Service) is a cloud object storage service offered by Amazon Web Services (AWS). It allows you to store and retrieve any amount of data at any time from anywhere on the Internet. Once we understand its purpose, we can create a bucket.
+- Why do I use this service?
 
-1. Go to the **S3** section in the AWS console.
+  I use this service as the main storage solution for the application. Amazon S3 is used to store user-generated and application-related files, including:
 
-2. Click **Create Bucket**.
+  - User attachments created during registration (e.g. profile images)
 
-   - Provide a name for the bucket.
+  - Subscription invoices generated when a user upgrades their plan
 
-   - Select a region.
+  - Documentation files generated by the LLM within the app
 
-   - Disable the **ACL** option.
+  - Application assets and static resources
 
-   - Enable **Block all public access**.
+  Using S3 allows the application to securely store, scale, and retrieve files efficiently while keeping storage concerns separate from the application servers.
 
-   - Leave the other settings as default and click **Create Bucket**.
+- How to use it?
 
-3. After creating the bucket, create the following folders inside it:
+  1.  Go to the **S3** section in the AWS console.
 
-   - media
+  2.  Click **Create Bucket**.
 
-   - attachments - (media/attachments)
+      - Provide a name for the bucket.
 
-   - user - (media/attachments/user)
+      - Select a region.
 
-   - profile - (media/attachments/user/profile)
+      - Disable the **ACL** option.
 
-- Once all folders are created the route looks like this:
+      - Enable **Block all public access**.
 
-  - first_folder_of_your_bucket/media/attachments/user/profile
+      - Leave the other settings as default and click **Create Bucket**.
 
-- Enter the **profile** folder and upload the file `personal_remote.png`.
+  3.  After creating the bucket, create the following folders inside it:
 
-  - This image is located in the backend `static` folder and represents a simple user avatar.
+      - media
 
-  - This is the only manual configuration required at bucket creation because the app will create additional folders automatically through backend environment variables.
+      - attachments - (media/attachments)
 
-4. Configure the bucket policy:
+      - user - (media/attachments/user)
 
-- Go to the **Permissions** tab, then **Bucket Policy**, and click **Edit** to add the following policy:
+      - profile - (media/attachments/user/profile)
 
-  ```json
-  {
-    "Version": "2008-10-17",
-    "Id": "PolicyForCloudFrontPrivateContent",
-    "Statement": [
+      - Once all folders are created the route looks like this:
+
+        - first_folder_of_your_bucket/media/attachments/user/profile
+
+      - Enter the **profile** folder and upload the file `personal_remote.png`.
+
+      - This image is located in the backend `static` folder and represents a simple user avatar.
+
+      - This is the only manual configuration required at bucket creation because the app will create additional folders automatically through backend environment variables.
+
+  4.  Configure the bucket policy:
+
+      - Go to the **Permissions** tab, then **Bucket Policy**, and click **Edit** to add the following policy:
+
+      ```json
       {
-        "Sid": "AllowCloudFrontServicePrincipal",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "cloudfront.amazonaws.com"
-        },
-        "Action": "s3:GetObject",
-        "Resource": "arn:aws:s3:::<YOUR-BUCKET-NAME>/*",
-        "Condition": {
-          "StringEquals": {
-            "AWS:SourceArn": "arn:aws:cloudfront::<YOUR-AWS-ACCOUNT-ID>:distribution/<YOUR-DISTRIBUTION-ID>"
+        "Version": "2008-10-17",
+        "Id": "PolicyForCloudFrontPrivateContent",
+        "Statement": [
+          {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<YOUR-BUCKET-NAME>/*",
+            "Condition": {
+              "StringEquals": {
+                "AWS:SourceArn": "arn:aws:cloudfront::<YOUR-AWS-ACCOUNT-ID>:distribution/<YOUR-DISTRIBUTION-ID>"
+              }
+            }
           }
-        }
+        ]
       }
-    ]
-  }
-  ```
+      ```
 
-5. Replace the placeholders inside < > with your actual values:
+  5.  Replace the placeholders inside < > with your actual values:
 
-- YOUR-BUCKET-NAME: Name of your newly created bucket
+  - YOUR-BUCKET-NAME: Name of your newly created bucket
 
-- YOUR-AWS-ACCOUNT-ID: Your AWS account ID
+  - YOUR-AWS-ACCOUNT-ID: Your AWS account ID
 
-- YOUR-DISTRIBUTION-ID: The CloudFront distribution ID you will create next
+  - YOUR-DISTRIBUTION-ID: The CloudFront distribution ID you will create next
 
 ## AWS - CloudFront
 
-Amazon CloudFront is AWS's content delivery network (CDN) service. It delivers files and web content quickly, securely, and efficiently to users worldwide. Once we understand its purpose, we can create a distribution.
+- Why do I use this service?
 
-1. Go to the **CloudFront** section in the AWS console.
+  I use this service as a security and delivery layer on top of Amazon S3. CloudFront allows me to restrict direct access to the S3 bucket and serve its content securely through a CDN.
 
-2. Click **Create Distribution**.
+  Additionally, CloudFront provides caching for documents and images stored in S3, which helps reduce the number of direct requests to the bucket, improving performance and lowering operational costs. It also allows cache invalidation, enabling updated content to be served immediately when needed.
 
-   - Provide a name for the distribution.
+- How to use it?
 
-   - Set the **Distribution Type** to **Single Website or App**.
+  1.  Go to the **CloudFront** section in the AWS console.
 
-   - Select **Amazon S3** as the **Origin Type**.
+  2.  Click **Create Distribution**.
 
-   - In the **Origin** section, choose the bucket you created earlier.
+      - Provide a name for the distribution.
 
-3. In the **Settings** section:
+      - Set the **Distribution Type** to **Single Website or App**.
 
-   - Enable **Allow Private S3 Bucket Access to CloudFront**.
+      - Select **Amazon S3** as the **Origin Type**.
 
-   - Leave WAF disabled.
+      - In the **Origin** section, choose the bucket you created earlier.
 
-4. Click **Create Distribution**.
+  3.  In the **Settings** section:
 
-5. Once the distribution is created, copy its ID and use it in the bucket policy you configured in the previous section.
+      - Enable **Allow Private S3 Bucket Access to CloudFront**.
 
-### Backend Environment Variables for AWS, S3, and CloudFront
+      - Leave WAF disabled.
 
-```
-# AWS
-AWS_ACCESS_KEY_ID="your_aws_access_key_id"
-AWS_SECRET_ACCESS_KEY="your_aws_secret_access_key"
-AWS_STORAGE_BUCKET_NAME="your_s3_bucket_name"
-AWS_LOCATION="your_first_folder_of_your_s3_bucket"
-AWS_MEDIA_LOCATION="your_first_folder_of_your_s3_bucket/media"
-AWS_USER_IMAGE_BUCKET_URL="attachments/user/profile/personal_remote.png"
-AWS_DEFAULT_REGION="your_aws_region"
-AWS_S3_CUSTOM_DOMAIN="your_cloudfront_domain"
-AWS_S3_FILE_OVERWRITE=False
-AWS_S3_CACHE_CONTROL="max-age=2592000, public"
+  4.  Click **Create Distribution**.
 
-# S3
-USE_S3=True
+  5.  Once the distribution is created, copy its ID and use it in the bucket policy you configured in the previous section.
 
-# CloudFront
-USE_CLOUDFRONT=True
-CLOUDFRONT_DISTRIBUTION_ID="your_cloudfront_distribution_id"
-```
+  ### Backend Environment Variables for AWS, S3, and CloudFront
+
+  ```
+  # AWS
+  AWS_ACCESS_KEY_ID="your_aws_access_key_id"
+  AWS_SECRET_ACCESS_KEY="your_aws_secret_access_key"
+  AWS_STORAGE_BUCKET_NAME="your_s3_bucket_name"
+  AWS_LOCATION="your_first_folder_of_your_s3_bucket"
+  AWS_MEDIA_LOCATION="your_first_folder_of_your_s3_bucket/media"
+  AWS_USER_IMAGE_BUCKET_URL="attachments/user/profile/personal_remote.png"
+  AWS_DEFAULT_REGION="your_aws_region"
+  AWS_S3_CUSTOM_DOMAIN="your_cloudfront_domain"
+  AWS_S3_FILE_OVERWRITE=False
+  AWS_S3_CACHE_CONTROL="max-age=2592000, public"
+
+  # S3
+  USE_S3=True
+
+  # CloudFront
+  USE_CLOUDFRONT=True
+  CLOUDFRONT_DISTRIBUTION_ID="your_cloudfront_distribution_id"
+  ```
 
 ## AWS - EC2
 
-Amazon EC2 (Elastic Compute Cloud) is AWS's cloud computing service that allows you to launch and manage virtual servers, known as instances. It is the foundation for running applications, websites, APIs, and services in AWS without maintaining your own physical hardware. Once we understand its purpose, we can create an EC2 instance.
+- Why do I use this service?
 
-1. Go to the **EC2** section in the AWS console.
+  I use this service because it provides a cloud-based virtual machine where I can run isolated workloads. In this project, EC2 acts as an intermediary layer between the main backend and the LLM service.
 
-2. Click **Launch/Create Instance**.
+  Inside the EC2 instance, a Docker image stored in GitHub Container Registry is executed. This image contains a FastAPI application responsible for communicating with the OpenRouter LLM via an API endpoint. The LLM response is then sent back to the main Django backend, which handles the core business logic of the application.
 
-   - Create only **one instance** (IMPORTANT).
+  This architecture allows better separation of concerns, improved scalability, and safer integration with external LLM services.
 
-   - Provide a name for the instance.
+- How to use it?
 
-   - Select the operating system (in this example, **Ubuntu Server 22.04**).
+  1.  Go to the **EC2** section in the AWS console.
 
-   - Choose the instance type, for example, **t3.micro**.
+  2.  Click **Launch/Create Instance**.
 
-   - Do not select any key pair because we will not connect via SSH. Choose **Proceed without a key pair**.
+      - Create only **one instance** (IMPORTANT).
 
-   - For the firewall, select an existing security group (e.g., **default**).
+      - Provide a name for the instance.
 
-   - Leave all other settings as default and create the instance.
+      - Select the operating system (in this example, **Ubuntu Server 22.04**).
 
-3. Once the instance is created, go to the **Security Groups** section:
+      - Choose the instance type, for example, **t3.micro**.
 
-   - Create a new security group.
+      - Do not select any key pair because we will not connect via SSH. Choose **Proceed without a key pair**.
 
-   - Provide a name and description.
+      - For the firewall, select an existing security group (e.g., **default**).
 
-   - Select the correct VPC.
+      - Leave all other settings as default and create the instance.
 
-   - Add an inbound rule:
+  3.  Once the instance is created, go to the **Security Groups** section:
 
-     - Type: Custom TCP
+      - Create a new security group.
 
-     - Protocol: TCP
+      - Provide a name and description.
 
-     - Port Range: 9000
+      - Select the correct VPC.
 
-     - Source: Your current IP
+      - Add an inbound rule:
 
-4. Apply the new security group to the instance:
+      - Type: Custom TCP
 
-   - Select the instance, go to **Actions > Security > Change Security Groups**, and replace **default** with the new security group.
+      - Protocol: TCP
 
-   - In the same menu, choose **Modify IAM Role** and select the role created earlier in this guide.
+      - Port Range: 9000
 
-5. Stop the instance:
+      - Source: Your current IP
 
-   - Select the instance, go to **Instance State**, and choose **Stop Instance**. Wait until it stops completely.
+  4.  Apply the new security group to the instance:
 
-6. Copy the **Instance ID** for later use. Example:
+      - Select the instance, go to **Actions > Security > Change Security Groups**, and replace **default** with the new security group.
 
-   - `EC2_INSTANCE_ID="XXXX"`
+      - In the same menu, choose **Modify IAM Role** and select the role created earlier in this guide.
 
-### Backend Environment Variables for EC2
+  5.  Stop the instance:
 
-```
-# EC2
-USE_EC2=True
-EC2_INSTANCE_ID="XXXX"
-```
+      - Select the instance, go to **Instance State**, and choose **Stop Instance**. Wait until it stops completely.
+
+  6.  This EC2 instance runs a container based on the fastapi-llm image stored on GitHub Packages (GHCR).
+
+      - You can find it here:
+
+        - [URL](https://github.com/users/adri27info/packages/container/package/fastapi-llm)
+
+  7.  Copy the **Instance ID** for later use. Example:
+
+      - `EC2_INSTANCE_ID="XXXX"`
+
+  ### Backend Environment Variables for EC2
+
+  ```
+  # EC2
+  USE_EC2=True
+  EC2_INSTANCE_ID="XXXX"
+  IMAGE_GHCR="ghcr.io/adri27info/fastapi-llm:latest"
+  ```
 
 ## AWS - SYSTEMS MANAGER
 
-AWS Systems Manager is an AWS service that allows you to centrally and securely manage and automate both cloud and on-premises infrastructure. With it, you can control, configure, monitor, and automate EC2 instances, on-premises servers, and AWS resources without manually connecting to each machine.
+- Why do I use this service?
 
-> Note: In this project, this section is handled via Django commands, so no additional configuration is needed here.
+  I use this service because it allows me to execute commands inside the EC2 instance remotely and securely. These commands are required to start the instance, run Docker, launch the application inside EC2, and ensure that the LLM generation process works correctly and its responses are properly delivered back to the main Django backend.
+
+  Using this service eliminates the need for direct SSH access and enables automated infrastructure control directly from the backend.
+
+  > Note: In this project, this functionality is handled through Django management commands, so no additional manual configuration is required in this section.
 
 ## BACKEND
 
@@ -481,7 +554,7 @@ Once you have configured both `.env` files for the frontend and backend, follow 
 1. Clone this project using:
 
    ```sh
-   git clone https://github.com/adri27info/devdocs-ai.git
+   git clone https://github.com/adri27info/devdocs_ai.git
    ```
 
 2. Start the Docker Desktop application.
